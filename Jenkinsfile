@@ -12,11 +12,6 @@ pipeline {
             }
         }
         stage('Three') {
-            when {
-                not {
-                    expression { currentBuild.rawBuild.getResult().isBetterOrEqualTo('SUCCESS') }
-                }
-            }
             steps {
                 echo "Hello"
             }
