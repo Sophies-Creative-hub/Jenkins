@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Three') {
             steps {
-                echo "Hello from here or there"
+                echo "Hello from here"
             }
         }
         stage('Four') {
