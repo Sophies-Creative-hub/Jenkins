@@ -5,13 +5,12 @@ pipeline {
             steps {
                 script {
                     echo "Hi from GitHub" 
-                    sh 'echo "Content for one.txt" > artifacts/one.txt'
-                    stash includes: 'artifacts/one.txt', name: 'myStash'
+                    writeFile file: 'artifacts/one.txt', text: 'Content for one.txt'
                     echo "Content written to one.txt"
                 }
+                archiveArtifacts "artifacts/one.txt"
             }
         }
-
         stage('Two') {
             steps {
                 input message: 'Do you want to proceed?', ok: 'Yes'
