@@ -4,17 +4,27 @@ pipeline {
         stage('One') {
             steps {
                 script {
-                    echo "Hi from GitHub" 
                     writeFile file: 'artifacts/one.txt', text: 'Content for one.txt'
                     echo "Content written to one.txt"
                 }
-                archiveArtifacts "artifacts/one.txt"
             }
         }
+
         stage('Two') {
             steps {
-                input message: 'Do you want to proceed?', ok: 'Yes'
-                archiveArtifacts 'artifacts/two.txt'
+                script {
+                    echo "Additional stage: Stage Two"
+                    sh 'ls -R'  // List all files in the workspace for debugging
+
+                    // Check if one.txt is not empty
+                    def isOneTxtEmpty = sh(script: 'test -s artifacts/one.txt', returnStatus: true)
+                    
+                    if (isOneTxtEmpty == 0) {
+                        archiveArtifacts 'artifacts/one.txt'
+                    } else {
+                        echo "one.txt is empty. Skipping archiving."
+                    }
+                }
             }
         }
 
