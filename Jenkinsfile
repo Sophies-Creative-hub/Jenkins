@@ -4,7 +4,7 @@ pipeline {
         stage('One') {
             steps {
                 script {
-                    echo 'Hi from GitHub'
+                    echo "Hi from GitHub"
                 }
                 archiveArtifacts 'artifacts/one.txt'
             }
