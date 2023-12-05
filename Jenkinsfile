@@ -5,13 +5,10 @@ pipeline {
             steps {
                 script {
                     echo "Hi from GitHub" 
-                    sh 'ls -R'  // List all files in the workspace for debugging
+                    sh 'echo "Content for one.txt" > artifacts/one.txt'
+                    sh 'cat artifacts/one.txt'  // Display the content for verification
                 }
                 archiveArtifacts "artifacts/one.txt"
-                script {
-                    echo "Contents of archived artifacts:"
-                    sh 'tar -tzf artifacts/one.txt'
-                }
             }
         }
 
