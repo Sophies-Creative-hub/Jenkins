@@ -3,22 +3,27 @@ pipeline {
     stages {
         stage('One') {
             steps {
-                echo 'Hi from GitHub'
+                script {
+                    echo 'Hi from GitHub'
+                }
                 archiveArtifacts 'artifacts/one.txt'
             }
         }
+
         stage('Two') {
             steps {
                 input message: 'Do you want to proceed?', ok: 'Yes'
                 archiveArtifacts 'artifacts/two.txt'
             }
         }
+
         stage('Three') {
             steps {
                 echo "Hello from here"
                 archiveArtifacts 'artifacts/three.txt'
             }
         }
+
         stage('Four') {
             parallel {
                 stage('Unit Test') {
@@ -35,6 +40,7 @@ pipeline {
                 }
             }
         }
+
         stage('Five') {
             steps {
                 echo "Additional stage: Stage Five"
