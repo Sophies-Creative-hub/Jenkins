@@ -1,22 +1,22 @@
 pipeline {
     agent any
-    triggers {
-        cron('H/5 * * * *')
-    }
     stages {
         stage('One') {
             steps {
                 echo 'Hi from GitHub'
+                archiveArtifacts 'artifacts/one.txt'
             }
         }
         stage('Two') {
             steps {
                 input message: 'Do you want to proceed?', ok: 'Yes'
+                archiveArtifacts 'artifacts/two.txt'
             }
         }
         stage('Three') {
             steps {
                 echo "Hello from here"
+                archiveArtifacts 'artifacts/three.txt'
             }
         }
         stage('Four') {
@@ -24,11 +24,13 @@ pipeline {
                 stage('Unit Test') {
                     steps {
                         echo "Running the unit test..."
+                        archiveArtifacts 'artifacts/unit_test.txt'
                     }
                 }
                 stage('Integration test') {
                     steps {
                         echo "Running the integration test..."
+                        archiveArtifacts 'artifacts/integration_test.txt'
                     }
                 }
             }
@@ -36,6 +38,7 @@ pipeline {
         stage('Five') {
             steps {
                 echo "Additional stage: Stage Five"
+                archiveArtifacts 'artifacts/five.txt'
             }
         }
     }
