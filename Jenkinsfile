@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('One') {
             steps {
-                echo 'Hi from GitHub'
+                echo 'Hi from GitHub' > 'artifacts/one.txt'
                 archiveArtifacts 'artifacts/one.txt'
             }
         }
